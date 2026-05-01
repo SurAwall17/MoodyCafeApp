@@ -13,8 +13,11 @@
 }
 
 @layer components {
-    .active {
-        @apply text-[#ED153E] border-b-2 transition-all duration-300 ease-in-out font-semibold;
+    .menu.active {
+        @apply text-white border-b-2 transition-all duration-300 ease-in-out font-semibold;
+    }
+    .menu {
+        @apply text-[#ffaebd];
     }
     .mobile-active {
         @apply bg-[#d4092f] w-full text-center transition-all duration-300 ease-in-out font-semibold;
