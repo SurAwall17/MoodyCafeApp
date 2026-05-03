@@ -13,11 +13,14 @@
 }
 
 @layer components {
+    .nav-onscroll {
+        @apply bg-[#ED153E] transition-all duration-300 ease-in-out;
+    }
     .menu.active {
         @apply text-white border-b-2 transition-all duration-300 ease-in-out font-semibold;
     }
     .menu {
-        @apply text-[#ffaebd];
+        @apply text-[#ffaebd] ;
     }
     .mobile-active {
         @apply bg-[#d4092f] w-full text-center transition-all duration-300 ease-in-out font-semibold;
@@ -30,7 +33,7 @@
     }
 
     .menu:hover {
-        @apply text-[#ED153E] transition-all duration-300 ease-in-out;
+        @apply text-white transition-all duration-300 ease-in-out;
     }
     .invisible {
         @apply translate-x-full transition-all duration-300 ease-in-out;

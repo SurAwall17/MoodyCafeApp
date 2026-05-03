@@ -1,6 +1,16 @@
 let hamburger_menu = document.querySelector("#hamburger-menu");
 let nav_visible = document.querySelector(".nav-visible");
 let close = document.querySelector(".close");
+let navbar = document.querySelector(".navbar");
+
+// navbarrscroll
+window.addEventListener("scroll", () => {
+    if (window.scrollY > 50) {
+        navbar.classList.add("nav-onscroll");
+    } else {
+        navbar.classList.remove("nav-onscroll");
+    }
+});
 
 // hamburger menu
 hamburger_menu.addEventListener("click", () => {

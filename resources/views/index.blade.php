@@ -9,8 +9,8 @@
 </head>
 
 <body>
-    <header class="bg-[#ED153E] h-[50vh]">
-        <nav class="fixed w-full py-5 px-7 md:px-14 flex justify-between">
+    <header>
+        <nav class="navbar fixed w-full py-3 px-7 md:px-14 flex justify-between">
             {{-- logo --}}
             <div class="logo">
                 <img src="{{ asset('images/logo-white.png') }}" class="w-36 md:w-48" alt="Logo Moody">
@@ -28,8 +28,15 @@
                 </li> --}}
                 <li class="">
                     <a href="/login">
-                        <Button class="btn-login flex px-3 py-2 bg-white text-[#ED153E] rounded-2xl font-semibold">Login
-                            <x-heroicon-o-arrow-left-end-on-rectangle class="w-5 me-1" />
+                        <Button class="btn-login flex px-3 py-1 bg-white text-[#ED153E] rounded  font-semibold">Login
+                        </Button>
+                    </a>
+                </li>
+                <span>|</span>
+                <li class="">
+                    <a href="/login">
+                        <Button
+                            class="btn-login flex px-3 py-1 bg-[#ED153E] text-white rounded border-2 font-semibold hover:bg-[#ce0d31] transition-all duration-300 ease-in-out">Register
                         </Button>
                     </a>
                 </li>
@@ -59,9 +66,31 @@
 
     {{-- content --}}
     <main>
-        <section>
-            <div class="bg-blue-500 h-[150vh]"></div>
+        <section class="header flex items-center h-[80vh] bg-no-repeat bg-cover"
+            style="background-image: url('{{ asset('images/header.png') }}')">
+            <div class="left-header w-1/2 p-30 text-white">
+                <div class="text-start">
 
+                    <h1 class="text-7xl font-bold mb-4">Feel The Coffee, Feel The Mood</h1>
+
+                    <p class="text-white text-2xl mb-8">
+                        Kadang yang kita butuh cuma jeda,
+                        antara dingin yang menenangkan dan hangat yang menguatkan.
+                        MoodyCafe, tempat semua rasa dipeluk pelan.
+                    </p>
+                    <button
+                        class="bg-white flex p-3 border border-2 rounded-lg text-[#ED153E] font-semibold hover:bg-[#ce0d31] transition-all duration-300 ease-in-out hover:text-white hover:border hover:border-2">Order
+                        Now
+                        <x-heroicon-s-arrow-right class="w-5 ms-1 font-semibold" /> </button>
+                </div>
+            </div>
+            <div class="right-header w-1/2 object-cover justify-items-end pe-30 pt-25">
+
+                <img src="{{ asset('images/hero-right.png') }}" class="w-full h-auto max-w-md" alt="">
+            </div>
+        </section>
+        <section class="content py-10 px-15 bg-gray-300 h-[150vh]">
+            <h1 class="font-semibold text-2xl">Product</h1>
         </section>
     </main>
 
