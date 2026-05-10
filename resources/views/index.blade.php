@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html class="scroll-smooth">
 
 <head>
     <meta charset="utf-8" />
@@ -12,17 +12,17 @@
 </head>
 
 <body>
-    <header>
-        <nav class="navbar fixed w-full py-3 z-9 px-7 md:px-30 flex justify-between">
+    <header id="home">
+        <nav class="navbar fixed w-full py-4 z-9 px-5 lg:px-30 flex justify-between">
             {{-- logo --}}
             <div class="logo">
-                <img src="{{ asset('images/logo-white.png') }}" class="w-36 md:w-48" alt="Logo Moody">
+                <img src="{{ asset('images/logo-white.png') }}" class="w-36 lg:w-48" alt="Logo Moody">
             </div>
 
             {{-- menu --}}
-            <ul class="hidden text-white md:flex md:gap-5 md:items-center">
-                <li class="menu active"><a href="/home">Home</a></li>
-                <li class="menu"><a href="/product">Product</a></li>
+            <ul class="hidden text-white lg:flex lg:gap-5 lg:items-center">
+                <li class="menu active"><a href="#home">Home</a></li>
+                <li class="menu"><a href="#product">Product</a></li>
                 <li class="menu"><a href="/order">Order</a></li>
                 <li class="menu"><a href="/about">About</a></li>
                 <li class="menu"><a href="/notification">Notifications</a></li>
@@ -47,8 +47,12 @@
             </ul>
 
             {{-- menu mobile --}}
-            <div class="mobile-nav md:hidden ">
-                <x-heroicon-o-bars-3 id="hamburger-menu" class="w-9 cursor-pointer" />
+            <div class="mobile-nav lg:hidden ">
+                <div class="flex gap-2">
+                    <x-heroicon-o-shopping-cart class="w-8 cursor-pointer text-white" />
+                    <x-heroicon-o-bell class="w-8 cursor-pointer text-white" />
+                    <x-heroicon-o-bars-3 id="hamburger-menu" class="w-9 cursor-pointer text-white" />
+                </div>
 
                 <div
                     class="nav-visible invisible w-80 block bg-[#ED153E] text-white right-0 top-0 h-screen absolute z-10 py-20 px-0 shadow-2xl">
@@ -56,7 +60,7 @@
 
                     <ul class="w-full justify-items-center">
                         <li class="menu-mobile py-3 mobile-active"><a href="/home">Home</a></li>
-                        <li class="menu-mobile py-3"><a href="/product">Product</a></li>
+                        <li class="menu-mobile py-3"><a href="#product">Product</a></li>
                         <li class="menu-mobile py-3"><a href="/order">Order</a></li>
                         <li class="menu-mobile py-3"><a href="/about">About</a></li>
                         <li class="menu-mobile py-3"><a href="/notification">Notification</a></li>
@@ -70,84 +74,122 @@
 
     {{-- content --}}
     <main>
-        <section class="header flex items-center h-[85vh] bg-no-repeat bg-cover"
+        <section class="header md:flex items-center h-auto bg-no-repeat bg-cover"
             style="background-image: url('{{ asset('images/header.png') }}')">
-            <div class="left-header w-1/2 p-30 text-white">
-                <div data-aos="fade-right" class="text-start">
+            <div class="left-header md:w-1/2 pt-20 pb-5 md:p-10 lg:p-30 text-white">
+                <div data-aos="fade-right" class="md:text-start">
 
-                    <h1 class="text-7xl font-bold mb-4">Feel The Coffee, Feel The Mood</h1>
+                    <div class="text w-70 md:w-full">
 
-                    <p class="text-white text-2xl mb-8">
-                        Kadang yang kita butuh cuma jeda,
-                        antara dingin yang menenangkan dan hangat yang menguatkan.
-                        MoodyCafe, tempat semua rasa dipeluk pelan.
-                    </p>
-                    <button
-                        class="bg-white flex p-3 border-2 rounded-lg text-[#ED153E] font-semibold hover:bg-[#ce0d31] transition-all duration-300 ease-in-out hover:text-white hover:border-2">Order
-                        Now
-                        <x-heroicon-s-arrow-right class="w-5 ms-1 font-semibold" /> </button>
+                        <h1 class="text-2xl md:text-4xl lg:text-7xl font-bold mb-2 ms-5 md:ms-0 lg:mb-4">Feel The
+                            Coffee, Feel
+                            The Mood</h1>
+                    </div>
+
+                    <div class="w-55 md:w-full">
+
+                        <p class="text-white text-[11px] md:text-[14px] lg:text-2xl mb-3 lg:mb-8 ms-5 md:ms-0">
+                            Kadang yang kita butuh cuma jeda,
+                            antara dingin yang menenangkan dan hangat yang menguatkan.
+                            MoodyCafe, tempat semua rasa dipeluk pelan.
+                        </p>
+                    </div>
+
+                    <a href="#product">
+                        <button
+                            class="ms-5 bg-white lg:m-0 flex p-2 md:p-3 border-2 rounded-lg text-[#ED153E] font-semibold hover:bg-[#ce0d31] transition-all duration-300 ease-in-out hover:text-white hover:border-2">Order
+                            Now
+                            <x-heroicon-s-arrow-right class="w-5 ms-1 font-semibold" />
+                        </button>
+                    </a>
+                    <img src="{{ asset('images/header-bot.png') }}" alt=""
+                        class="md:hidden w-43 absolute right-0 bottom-[-20px]">
+
                 </div>
+
+
+
+
+
             </div>
+
             <div data-aos="fade-left" data-aos-duration="500"
-                class="right-header w-1/2 object-cover justify-items-end pe-30 pt-15">
+                class="hidden md:block right-header md:w-1/2 object-cover justify-items-end p-5 md:pe-30 md:pt-20">
 
                 <img src="{{ asset('images/hero-right.png') }}" class="w-full h-auto max-w-md" alt="">
             </div>
+
+
         </section>
 
-        <section class="best-seller w-full py-5 px-30 bg-gray-100">
-            <h1 class="font-semibold text-3xl text-center">Best Seller</h1>
-            <div class="best-seller1 w-full grid grid-cols-2 grid-rows-1 h-90 mt-7">
+        <section class="best-seller w-full p-5 lg:py-5 lg:px-30 bg-gray-100">
+            <h1 class="font-semibold text-3xl text-center text-[#ED153E]">Best Seller</h1>
+            <div class="flex justify-center">
+
+                <div class="bg-[#ED153E] w-13 h-1 rounded-2xl"></div>
+
+            </div>
+            <div class="best-seller1 w-full grid grid-cols-1 grid-rows-2 md:grid-cols-2 md:grid-rows-1 h-100 mt-5">
                 <div class="bg-white">
-                    <img src="" alt="Gambar" class="h-full w-full object-cover">
+                    <img src="{{ asset('images/aren.png') }}" alt="Gambar" class="h-full w-full object-cover">
                 </div>
                 <div class="bg-[#ED153E] w-full"></div>
             </div>
 
-            <div class="best-seller1 w-full grid grid-cols-2 grid-rows-1 h-90 mt-7">
-                <div class="bg-green-800 w-full"></div>
-                <div class="bg-white">
-                    <img src="" alt="Gambar" class="h-full w-full object-cover">
+            <div class="best-seller1 w-full grid grid-cols-1 grid-rows-2 md:grid-cols-2 md:grid-rows-1 h-100 mt-7">
+                <div class="bg-white md:order-2">
+                    <img src="{{ asset('images/matcha.png') }}" alt="Gambar" class="h-full w-full object-cover">
                 </div>
+                <div class="bg-green-800 w-full md:order-1"></div>
+
             </div>
 
-            <div class="best-seller1 w-full grid grid-cols-2 grid-rows-1 h-90 mt-7">
+            <div class="best-seller1 w-full grid grid-cols-1 grid-rows-2 md:grid-cols-2 md:grid-rows-1 h-100 mt-7">
                 <div class="bg-white">
-                    <img src="" alt="Gambar" class="h-full w-full object-cover">
+                    <img src="{{ asset('images/almond.png') }}" alt="Gambar" class="h-full w-full object-cover">
                 </div>
                 <div class="bg-yellow-600 w-full"></div>
             </div>
 
         </section>
 
-        <section class="content w-full py-10 px-30 bg-gray-100 h-auto">
+        <section id="product" class="content w-full p-6 lg:py-10 lg:px-30 bg-gray-100 h-auto">
             <div class="flex pb-5 justify-between">
                 <h1 class="font-semibold text-3xl">Product</h1>
-                <a href="/product" class="flex text-2xl text-[#ED153E]">Selengkapnya <x-heroicon-o-arrow-right
-                        class="w-8" /> </a>
+                <a href="/product" class="flex text-xl lg:text-2xl text-[#ED153E] items-center">Selengkapnya
+                    <x-heroicon-o-arrow-right class="w-5 lg:w-8" /> </a>
             </div>
 
-            <div class="product gap-10 w-full flex flex-wrap justify-start ">
-                <div class="card bg-white w-85 p-6 rounded-2xl">
-                    <div class="card-image  w-full h-60 bg-gray-50 bg-cover">
-                        <img src="{{ asset('images/kopi.png') }}" class="w-full h-full rounded-2xl object-cover"
-                            alt="">
+            <div class="product w-full gap-2 md:gap-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
+
+                <div class="card bg-white p-3 md:p-6">
+                    <div class="card-image  w-full h-30 md:h-40 lg:h-60 bg-gray-50 bg-cover">
+                        <img src="{{ asset('images/kopi.png') }}" class="w-full h-full object-cover" alt="">
                     </div>
-                    <div class="card-title font-semibold text-2xl mt-2">Moody Aren</div>
+                    <div class="card-title font-semibold md:text-2xl mt-2">Moody Aren</div>
                     <div class="card-subtitle text-gray-500">Coffee</div>
-                    <div class="flex justify-between w-full mt-3">
-                        <div class="card-price text-2xl">Rp. 10.000</div>
-                        <div class="card-buy"><button
-                                class="bg-[#ED153E] text-white p-1 w-15 rounded font-semibold">Beli</button>
+                    <div class="flex justify-between items-center w-full mt-3">
+                        <div class="card-price md:text-2xl">Rp. 10.000</div>
+                        <div class="card-buy "><button
+                                class="hover:bg-[#ce0d31] transition-all ease-in-out duration-300 bg-[#ED153E] flex text-white p-1 md:p-2 rounded font-semibold"><x-heroicon-s-shopping-cart
+                                    class="w-5 md:w-5" />
+                            </button>
                         </div>
                     </div>
                 </div>
 
+
+
             </div>
         </section>
 
-        <section class="w-full py-10 px-30 bg-gray-100 h-auto">
-            <h1 class="font-semibold text-3xl text-center">F.A.Q</h1>
+        <section class="w-full p-6 lg:py-10 lg:px-30 bg-gray-100 h-auto">
+            <h1 class="font-semibold text-3xl text-center text-[#ED153E]">F.A.Q</h1>
+            <div class="flex justify-center mt-1">
+
+                <div class="bg-[#ED153E] w-13 h-1 rounded-2xl"></div>
+
+            </div>
             <details class="bg-white p-5 mb-2 mt-5 ">
                 <summary class="cursor-pointer">
                     Apa itu MoodyCafe?
@@ -175,11 +217,46 @@
         </section>
     </main>
 
-    <section class="w-full py-10 px-30 bg-gray-100 h-auto">
+    <section class="w-full p-6 lg:py-10 lg:px-30 bg-gray-100 h-auto">
         <h1 class="font-semibold text-3xl text-center">Need Help? <span class="text-[#ED153E]">Contact Us</span></h1>
-        <div class="grid grid-cols-2 grid-rows-1 gap-3 h-auto mt-5">
-            <div class="bg-white">
+        <div class="flex justify-center mt-2">
 
+            <div class="bg-[#ED153E] w-13 h-1 rounded-2xl"></div>
+
+        </div>
+        <div class="grid lg:grid-cols-2 lg:grid-rows-1 grid-rows-2 gap-3 h-auto mt-5">
+            <div class="bg-white p-5 ">
+                <div class="locate flex mb-5">
+                    <div class="bg-gray-100 rounded-full p-3">
+                        <x-heroicon-o-phone class="w-7 text-[#ED153E]" />
+                    </div>
+                    <div class="ps-2">
+                        <h1 class="text-[20px] font-semibold ">Phone</h1>
+                        <h2 class="text-sm">+62 823-9306-3712</h2>
+                    </div>
+                </div>
+                <div class="locate flex mb-5">
+                    <div class="bg-gray-100 rounded-full p-3">
+                        <x-heroicon-o-envelope class="w-7 text-[#ED153E]" />
+                    </div>
+                    <div class="ps-2">
+                        <h1 class="text-[20px] font-semibold ">Email Us</h1>
+                        <h2 class="text-sm">moodycafe123@gmail.com</h2>
+                    </div>
+                </div>
+                <div class="locate flex mb-5">
+                    <div class="bg-gray-100 rounded-full p-3">
+                        <x-heroicon-o-map-pin class="w-7 text-[#ED153E]" />
+                    </div>
+                    <div class="ps-2">
+                        <h1 class="text-[20px] font-semibold ">Address</h1>
+                        <h2 class="text-sm">Jl. Poros Benteng, Malimpung, Kab. Pinrang</h2>
+                    </div>
+                </div>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3981.3752114903155!2d119.73221817572887!3d-3.7281113962458052!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d9449d562f8d4c9%3A0x2b7290c94a529d59!2sSALSA%20COMPUTER!5e0!3m2!1sid!2sid!4v1778166193831!5m2!1sid!2sid"
+                    class="w-full h-70" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
             <div class="bg-white p-5">
                 <form action="" class="space-y-3">
@@ -193,7 +270,7 @@
                             <input type="text" class="p-3 w-full outline-none border-[1px] border-gray-400">
                         </div>
                     </div>
-
+                    com
                     <div class="input-field">
                         <label for="">Subject</label>
                         <input type="text" class="p-3 w-full outline-none border-[1px] border-gray-400">
@@ -260,8 +337,11 @@
         </div>
 
         <!-- Bottom -->
-        <div class="border-t border-gray-700 text-center py-4 text-sm text-gray-500">
-            © 2026 MoodyCafe. All rights reserved.
+        <div class="grid grid-rows-2 border-t border-gray-700 text-center py-4 text-sm text-gray-500">
+            <span>
+                © 2026 MoodyCafe. All rights reserved.
+            </span>
+            <span>Made by <a href="" class="font-semibold hover:underline">Surawal</a></span>
         </div>
     </footer>
 
