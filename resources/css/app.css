@@ -10,26 +10,28 @@
         "Instrument Sans", ui-sans-serif, system-ui, sans-serif,
         "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
         "Noto Color Emoji";
+    --color-primary: #ed153e;
+    --color-secondary: #ce0d31;
 }
 
 @layer components {
     .nav-onscroll {
-        @apply bg-[#ED153E] transition-all duration-300 ease-in-out;
+        @apply bg-primary transition-all duration-300 ease-in-out;
     }
     .menu.active {
         @apply text-white border-b-2 transition-all duration-300 ease-in-out font-semibold;
     }
     .menu {
-        @apply text-[#ffaebd] ;
+        @apply text-[#ffaebd];
     }
     .mobile-active {
-        @apply bg-[#d4092f] w-full text-center transition-all duration-300 ease-in-out font-semibold;
+        @apply bg-secondary w-full text-center transition-all duration-300 ease-in-out font-semibold;
     }
     .menu-mobile {
         @apply w-full text-center;
     }
     .menu-mobile:hover {
-        @apply bg-[#d4092f] w-full text-center transition-all duration-300 ease-in-out;
+        @apply bg-secondary w-full text-center transition-all duration-300 ease-in-out;
     }
 
     .menu:hover {
@@ -44,5 +46,9 @@
 
     .glass-effect {
         @apply bg-black/20 backdrop-blur-2xl border-b-black border-white/30 shadow-lg;
+    }
+
+    .kasir-active {
+        @apply bg-secondary rounded-2xl;
     }
 }
