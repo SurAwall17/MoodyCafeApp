@@ -29,21 +29,14 @@
                 {{-- <li class="menu cursor-pointer"><x-heroicon-s-user-circle
                         class="w-8 text-white  hover:text-[#157aedd4] transition-all duration-300 ease-in-out" />
                 </li> --}}
-                <li class="">
-                    <a href="/login">
-                        <Button
-                            class="btn-login flex px-3 py-1 bg-white border-white border-2 text-primary rounded font-semibold hover:bg-secondary hover:text-white hover:border-2 transition-all duration-300 ease-in-out">Login
-                        </Button>
-                    </a>
-                </li>
-                <span>|</span>
-                <li class="">
-                    <a href="/login">
-                        <Button
-                            class="btn-login flex px-3 py-1 bg-primary text-white rounded border-2 font-semibold hover:bg-secondary transition-all duration-300 ease-in-out">Register
-                        </Button>
-                    </a>
-                </li>
+
+                <form action="/logout" method="post">
+                    @csrf
+                    <button type="submit"
+                        class="btn-login flex px-2 py-1 bg-primary text-white rounded border-2 font-semibold hover:bg-secondary transition-all duration-300 ease-in-out">Logout
+                        <x-heroicon-o-arrow-right-start-on-rectangle class="w-5" />
+                    </button>
+                </form>
             </ul>
 
             {{-- menu mobile --}}

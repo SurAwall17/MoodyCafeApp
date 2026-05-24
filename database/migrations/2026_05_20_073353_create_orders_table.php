@@ -23,6 +23,7 @@ return new class extends Migration
             $table->enum('order_status', ['waiting_payment', 'processed', 'shipped', 'completed', 'cancelled'])->default('waiting_payment');
             $table->timestamp('order_at');
             $table->decimal('subtotal', 15, 2);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

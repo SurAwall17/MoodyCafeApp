@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('transaction_id');
             $table->timestamp('transaction_time');
             $table->string('transaction_status');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

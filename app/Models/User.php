@@ -7,6 +7,7 @@ namespace App\Models;
 // use Illuminate\Database\Eloquent\Attributes\Fillable;
 // use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -15,7 +16,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, SoftDeletes;
 
     protected $guarded = ['id'];
     /**
@@ -32,18 +33,18 @@ class User extends Authenticatable
     }
 
     public function address(){
-        return $this->belongsTo(address::class);
+        return $this->hasOne(Address::class);
     }
 
     public function carts(){
-        return $this->hasMany(carts::class);
+        return $this->hasMany(Carts::class);
     }
 
     public function orders(){
-        return $this->hasMany(orders::class);
+        return $this->hasMany(Orders::class);
     }
 
     public function notification(){
-        return $this->hasMany(notifications::class);
+        return $this->hasMany(Notifications::class);
     }
 }

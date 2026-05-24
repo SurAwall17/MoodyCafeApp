@@ -262,8 +262,10 @@
                     <h2 class="text-sm">Jl. Poros Benteng, Malimpung, Kab. Pinrang</h2>
                 </div>
             </div>
+
+
             <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3981.3752114903155!2d119.73221817572887!3d-3.7281113962458052!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d9449d562f8d4c9%3A0x2b7290c94a529d59!2sSALSA%20COMPUTER!5e0!3m2!1sid!2sid!4v1778166193831!5m2!1sid!2sid"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d248.8359485395339!2d119.73472235647051!3d-3.7281190947960785!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d9449002cbac365%3A0x472509fa685320e0!2sMOODY%20CAFE!5e0!3m2!1sid!2sid!4v1779508942088!5m2!1sid!2sid"
                 class="w-full h-70" style="border:0;" allowfullscreen="" loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
