@@ -26,6 +26,7 @@ class ProductForm
                 ->directory('product_image')
                 ->required()
                 ->visibility('public')
+                ->disk('public')
                 ->image()
                 ->maxSize(2048)
                 ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg', 'image/gif', 'image/webp'])

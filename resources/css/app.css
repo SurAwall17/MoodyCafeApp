@@ -15,6 +15,12 @@
 }
 
 @layer components {
+    .title {
+        @apply text-center font-semibold text-4xl;
+    }
+    .sub-title {
+        @apply text-center;
+    }
     .nav-onscroll {
         @apply bg-primary transition-all duration-300 ease-in-out;
     }
@@ -50,5 +56,13 @@
 
     .kasir-active {
         @apply bg-secondary rounded-2xl;
+    }
+
+    .sugar-active {
+        @apply border-primary text-primary;
+    }
+
+    .sugar {
+        @apply border-gray-300 text-gray-400;
     }
 }

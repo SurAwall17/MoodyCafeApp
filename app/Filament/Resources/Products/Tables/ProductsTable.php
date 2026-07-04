@@ -19,7 +19,7 @@ class ProductsTable
     {
         return $table
             ->columns([
-                ImageColumn::make('image')->circular(),
+                ImageColumn::make('image')->circular()->disk('public'),
                 TextColumn::make('name'),
                 TextColumn::make('categories.name')->label('Kategori'),
                 TextColumn::make('slug'),

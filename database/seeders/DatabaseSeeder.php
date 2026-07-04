@@ -22,5 +22,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@admin.com',
             'password' => 'superadmin123',
         ]);
+
+
     }
 }

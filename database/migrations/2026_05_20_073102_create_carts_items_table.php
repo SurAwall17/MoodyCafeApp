@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('cart_id')->constrained('carts')->cascadeOnDelete();
             $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
             $table->integer('qty');
+            $table->string('sugar_level');
             $table->decimal('price', 15, 2);
             $table->decimal('subtotal', 15, 2);
             $table->softDeletes();

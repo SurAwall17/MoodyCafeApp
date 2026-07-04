@@ -76,6 +76,8 @@
             </div>
         </div>
 
+
+
         <div
             class="best-seller1 w-full grid grid-cols-1 grid-rows-2 md:grid-cols-2 md:grid-rows-1 md:h-85 lg:h-100 mt-7">
             <div class="bg-white md:order-2">
@@ -121,37 +123,103 @@
 
         <div class="product w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-5">
 
-            <div class="card bg-white rounded-2xl overflow-hidden ">
-
-                <div class="card-image w-full h-36 md:h-48 lg:h-64 bg-gray-100 overflow-hidden">
-                    <img src="{{ asset('images/kopi.png') }}"
-                        class="w-full h-full object-cover hover:scale-105 transition-all duration-500" alt="">
-                </div>
-
-                <div class="p-3 md:p-5">
-                    <div class="card-title font-semibold text-base md:text-xl">
-                        Moody Aren
+            @foreach ($product as $item)
+                <div class="card bg-white rounded-2xl overflow-hidden ">
+                    <div class="card-image w-full h-36 md:h-48 lg:h-64 bg-gray-100 overflow-hidden">
+                        <img src="{{ Storage::url($item->image) }}"
+                            class="w-full h-full object-cover hover:scale-105 transition-all duration-500"
+                            alt="">
                     </div>
-                    <div class="inline-block bg-gray-100 text-gray-500 text-xs px-3 py-1 rounded-full mt-2">
-                        Coffee
-                    </div>
-                    <div class="flex justify-between items-center mt-4">
-                        <div class="card-price font-semibold text-sm md:text-xl">
-                            Rp 10.000
+
+                    <div class="p-3 md:p-5">
+                        <div class="card-title font-semibold text-base md:text-xl">
+                            {{ $item->name }}
                         </div>
-                        <button
-                            class="bg-primary hover:bg-secondary transition-all duration-300 text-white px-2 md:px-4 py-2 rounded-sm shadow-md flex items-center gap-2 hover:scale-105">
+                        <div class="inline-block bg-gray-100 text-gray-500 text-xs px-3 py-1 rounded-full mt-2">
+                            {{ $item->categories->name }}
+                        </div>
+                        <div class="flex justify-between items-center mt-4">
+                            <div class="card-price font-semibold text-sm md:text-xl">
+                                {{ 'Rp.' . number_format($item->price, 0, ',', '.') }}
+                            </div>
+                            <button
+                                class="add bg-primary hover:bg-secondary transition-all duration-300 text-white px-2 md:px-4 py-2 rounded-sm shadow-md flex items-center gap-2 hover:scale-105"
+                                data-id="{{ $item->id }}" data-name="{{ $item->name }}"
+                                data-price="{{ $item->price }}" data-baseprice="{{ $item->price }}"
+                                data-category="{{ $item->categories->name }}"
+                                data-image="{{ Storage::url($item->image) }}">
 
-                            <x-heroicon-s-shopping-cart class="w-4 h-4" />
+                                <x-heroicon-s-shopping-cart class="w-4 h-4" />
 
-                            <span class="hidden md:block text-sm font-medium">
-                                Add
-                            </span>
+                                <span class="hidden md:block text-sm font-medium">
+                                    Add
+                                </span>
 
-                        </button>
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endforeach
+
+
+            <x-modal-buy title="Checkout">
+                <form action="{{ route('cart.add') }}" method="POST" class="flex gap-4">
+                    @csrf
+                    <div class="w-1/2 h-100">
+                        <img id="product_image" class="rounded-xl h-full w-full object-cover ">
+                    </div>
+                    <div class="form w-1/2">
+                        <h1 class="text-2xl font-semibold mb-4">Product Details</h1>
+                        <input type="hidden" id="product_id" name="product_id">
+
+                        <label for="">Nama Produk</label>
+                        <input type="text" id="product_name" name="product_name"
+                            class="bg-gray-100 mb-3 rounded-sm w-full p-2 focus:outline-primary" disabled>
+
+                        <label for="">Kategori</label>
+                        <input type="text" id="product_category" name="product_category"
+                            class="bg-gray-100 mb-3 rounded-sm w-full p-2 focus:outline-primary" disabled>
+
+                        <div class="flex gap-1 mb-3">
+                            <button type="button"
+                                class="sugar px-2 py-1 border-2 text-sm rounded-4xl bg-white hover:cursor-pointer">Less
+                                Sugar</button>
+                            <button type="button" id="btnSelected"
+                                class="sugar-active px-2 py-1 border-2 text-sm rounded-4xl bg-white hover:cursor-pointer ">Normal</button>
+                            <button type="button"
+                                class="sugar px-2 py-1 border-2 text-sm rounded-4xl bg-white hover:cursor-pointer">Extra
+                                Sugar</button>
+                        </div>
+                        <input type="hidden" id="sugar_level" name="sugar_level">
+
+                        <label for="">Jumlah Produk</label>
+                        <input type="number" id="product_qty" name="product_qty"
+                            class="bg-gray-100 mb-3 rounded-sm w-full p-2 focus:outline-primary" value="1">
+
+                        <label for="">Harga</label>
+                        <input type="text" id="product_price" name="product_price"
+                            class="bg-gray-100 mb-3 rounded-sm w-full p-2 focus:outline-primary" disabled>
+                        <input type="text" id="base_price"
+                            class="bg-gray-100 mb-3 rounded-sm w-full p-2 focus:outline-primary" hidden>
+
+                        {{-- footer --}}
+                        <div class="footer flex justify-end gap-2 font-semibold">
+                            <button type="submit"
+                                class="flex py-1 px-2 text-white bg-yellow-300 rounded-sm hover:bg-yellow-400 transition-all ease-in-out duration-100">
+                                <x-heroicon-o-shopping-cart class="w-5" /> AddCart</button>
+                            <button
+                                class="flex py-1 px-2 text-white bg-primary rounded-sm hover:bg-secondary transition-all ease-in-out duration-100">
+                                <x-heroicon-o-credit-card class="w-5" />
+                                Checkout</button>
+                        </div>
+                    </div>
+
+
+
+                </form>
+
+            </x-modal-buy>
+
         </div>
     </section>
 
@@ -298,63 +366,7 @@
         </div>
     </div>
 </section>
-{{-- footer --}}
-<footer class="w-full bg-gray-900 text-gray-300">
-    <div class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
 
-        <!-- Brand -->
-        <div>
-            <h2 class="text-2xl font-bold text-white">MoodyCafe</h2>
-            <p class="mt-3 text-sm text-gray-400">
-                Di antara hangatnya kopi dan tenangnya suasana,
-                kami hadir untuk menemani setiap ceritamu.
-            </p>
-        </div>
-
-        <!-- Menu -->
-        <div>
-            <h3 class="text-lg font-semibold text-white mb-3">Menu</h3>
-            <ul class="space-y-2 text-sm">
-                <li><a href="#" class="hover:text-white transition">Home</a></li>
-                <li><a href="#" class="hover:text-white transition">About</a></li>
-                <li><a href="#" class="hover:text-white transition">Menu</a></li>
-                <li><a href="#" class="hover:text-white transition">Contact</a></li>
-            </ul>
-        </div>
-
-        <!-- Contact -->
-        <div>
-            <h3 class="text-lg font-semibold text-white mb-3">Contact</h3>
-            <p class="flex text-sm text-gray-400">
-                <x-heroicon-o-map-pin class="w-5 me-1" />
-                <span>Malimpung, Kab. Pinrang</span>
-            </p>
-            <p class="flex text-sm text-gray-400 mt-2">
-                <x-heroicon-o-phone class="w-5 me-1" />
-                <span>+62 823-9306-3712</span>
-            </p>
-            <p class="flex text-sm text-gray-400 mt-2">
-                <x-heroicon-o-envelope class="w-5 me-1" />
-                <span>moodycafe@email.com</span>
-            </p>
-
-            <!-- Social -->
-            <div class="flex space-x-4 mt-4">
-                <a href="#" class="hover:text-white transition">Instagram</a>
-                <a href="#" class="hover:text-white transition">WhatsApp</a>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- Bottom -->
-    <div class="grid grid-rows-2 border-t border-gray-700 text-center py-4 text-sm text-gray-500">
-        <span>
-            © 2026 MoodyCafe. All rights reserved.
-        </span>
-        <span>Made by <a href="" class="font-semibold hover:underline">Surawal</a></span>
-    </div>
-</footer>
 
 </body>
 

@@ -13,7 +13,8 @@
 
 <body>
     <header id="home">
-        <nav class="navbar fixed w-full py-4 z-9 px-5 lg:px-30 flex justify-between">
+        <nav
+            class="navbar {{ $title !== 'home' ? 'bg-primary' : '' }} fixed w-full py-4 z-9 px-5 lg:px-30 flex justify-between">
             {{-- logo --}}
             <div class="logo">
                 <img src="{{ asset('images/logo-white.png') }}" class="w-36 lg:w-48" alt="Logo Moody">
@@ -21,11 +22,12 @@
 
             {{-- menu --}}
             <ul class="hidden text-white lg:flex lg:gap-5 lg:items-center">
-                <li class="menu active"><a href="#home">Home</a></li>
+                <li class="menu {{ $title === 'home' ? 'active' : '' }}"><a href="/">Home</a></li>
                 <li class="menu"><a href="#product">Product</a></li>
+                <li class="menu {{ $title === 'cart' ? 'active' : '' }}"><a href="/cart">Cart</a></li>
                 <li class="menu"><a href="/order">Order</a></li>
-                <li class="menu"><a href="/about">About</a></li>
                 <li class="menu"><a href="/notification">Notifications</a></li>
+                <li class="menu"><a href="/about">About</a></li>
                 {{-- <li class="menu cursor-pointer"><x-heroicon-s-user-circle
                         class="w-8 text-white  hover:text-[#157aedd4] transition-all duration-300 ease-in-out" />
                 </li> --}}
