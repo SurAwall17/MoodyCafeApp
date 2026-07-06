@@ -14,7 +14,7 @@
 <body>
     <header id="home">
         <nav
-            class="navbar {{ $title !== 'home' ? 'bg-primary' : '' }} fixed w-full py-4 z-9 px-5 lg:px-30 flex justify-between">
+            class="navbar {{ $title !== 'home' ? 'bg-primary' : '' }} fixed w-full py-3 z-9 px-5 lg:px-30 flex justify-between">
             {{-- logo --}}
             <div class="logo">
                 <img src="{{ asset('images/logo-white.png') }}" class="w-36 lg:w-48" alt="Logo Moody">
@@ -23,22 +23,51 @@
             {{-- menu --}}
             <ul class="hidden text-white lg:flex lg:gap-5 lg:items-center">
                 <li class="menu {{ $title === 'home' ? 'active' : '' }}"><a href="/">Home</a></li>
-                <li class="menu"><a href="#product">Product</a></li>
+                <li class="menu {{ $title === 'products' ? 'active' : '' }}"><a href="/products">Product</a></li>
                 <li class="menu {{ $title === 'cart' ? 'active' : '' }}"><a href="/cart">Cart</a></li>
                 <li class="menu"><a href="/order">Order</a></li>
                 <li class="menu"><a href="/notification">Notifications</a></li>
                 <li class="menu"><a href="/about">About</a></li>
-                {{-- <li class="menu cursor-pointer"><x-heroicon-s-user-circle
-                        class="w-8 text-white  hover:text-[#157aedd4] transition-all duration-300 ease-in-out" />
-                </li> --}}
+                <li class="menu relative flex" onclick="handleDropdown()">
+                    <div class="icon-profile flex w-13" id="icon-profile">
+                        <div class="image">
+                            <img class="rounded-full"
+                                src="{{ auth()->user()->photo ?? 'https://ui-avatars.com/api/?length=1&background=random&color=fff&name=' . auth()->user()->name }}"
+                                alt="">
+                        </div>
+                        <x-heroicon-o-chevron-down class="w-8 cursor-pointer" />
+                    </div>
+                    <div class="hidden absolute right-0 mt-10 text-gray-600 shadow-2xl bg-white rounded-lg p-2 w-max max-w-100"
+                        id="profile-dropdown">
 
-                <form action="/logout" method="post">
-                    @csrf
-                    <button type="submit"
-                        class="btn-login flex px-2 py-1 bg-primary text-white rounded border-2 font-semibold hover:bg-secondary transition-all duration-300 ease-in-out">Logout
-                        <x-heroicon-o-arrow-right-start-on-rectangle class="w-5" />
-                    </button>
-                </form>
+                        <div class="flex items-center">
+                            <img class="rounded-full h-10"
+                                src="{{ auth()->user()->photo ?? 'https://ui-avatars.com/api/?length=1&background=random&color=fff&name=' . auth()->user()->name }}"
+                                alt="">
+
+                            <div class="p-2" id="username">
+                                <p class="text-black font-semibold">{{ auth()->user()->name }}</p>
+                                <p class="text-sm truncate" title="{{ auth()->user()->email }}">
+                                    {{ auth()->user()->email }}
+                                </p>
+                            </div>
+                        </div>
+                        <a href="/profile"
+                            class="flex p-2 rounded hover:bg-gray-500/10 transition-all ease-in-out duration-200"><x-heroicon-o-cog-6-tooth
+                                class="w-5 me-1" /> Settings</a>
+                        <form action="/logout" method="post"
+                            class="rounded hover:bg-primary/10 p-2 transition-all ease-in-out duration-200 cursor-pointer">
+                            @csrf
+                            <button type="submit" class="flex text-primary cursor-pointer">
+                                <x-heroicon-o-arrow-right-start-on-rectangle class="w-5 me-1 " /> Logout
+                            </button>
+                        </form>
+                    </div>
+                </li>
+
+
+
+
             </ul>
 
             {{-- menu mobile --}}
@@ -55,7 +84,7 @@
 
                     <ul class="w-full justify-items-center">
                         <li class="menu-mobile py-3 mobile-active"><a href="/home">Home</a></li>
-                        <li class="menu-mobile py-3"><a href="#product">Product</a></li>
+                        <li class="menu-mobile py-3"><a href="/products">Product</a></li>
                         <li class="menu-mobile py-3"><a href="/order">Order</a></li>
                         <li class="menu-mobile py-3"><a href="/about">About</a></li>
                         <li class="menu-mobile py-3"><a href="/notification">Notification</a></li>

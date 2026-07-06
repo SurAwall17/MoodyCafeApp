@@ -14,10 +14,13 @@ return new class extends Migration
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->string('latitude');
+            $table->string('longtitude');
             $table->string('desa');
             $table->string('kecamatan');
-            $table->string('kode_pos');
+            $table->string('provinsi');
             $table->text('full_address');
+            $table->string('jarak');
             $table->softDeletes();
             $table->timestamps();
         });

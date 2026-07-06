@@ -117,7 +117,7 @@
     <section id="product" class="content w-full p-6 lg:py-10 lg:px-30 bg-gray-100 h-auto">
         <div class="flex pb-5 justify-between">
             <h1 class="font-semibold text-3xl">Product</h1>
-            <a href="/product" class="flex text-xl lg:text-2xl text-primary items-center">Selengkapnya
+            <a href="/products" class="flex text-xl lg:text-2xl text-primary items-center">Selengkapnya
                 <x-heroicon-o-arrow-right class="w-5 lg:w-8" /> </a>
         </div>
 

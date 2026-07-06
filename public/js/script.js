@@ -292,6 +292,11 @@ function cartChecked() {
     });
 }
 
+function handleDropdown() {
+    const profileDropdown = document.getElementById("profile-dropdown");
+    profileDropdown.classList.toggle("hidden");
+}
+
 function initApp() {
     initNavbar();
     initSidebar();

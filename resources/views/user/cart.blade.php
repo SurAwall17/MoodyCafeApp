@@ -143,11 +143,12 @@
                         <p class="total-price-order font-semibold py-2">Rp.0 </p>
                     </div>
 
-                    {{-- <div class="flex justify-end w-full"> --}}
+
                     <button
-                        class="flex text-white font-semibold mt-4 rounded p-2 bg-primary ms-auto hover:bg-primary/80 transition-all duration-200 ease-in-out"><x-heroicon-o-shopping-bag
-                            class="w-5 me-1" /> Checkout</button>
-                    {{-- </div> --}}
+                        class="flex text-white font-semibold mt-4 rounded p-2 bg-primary ms-auto hover:bg-primary/80 transition-all duration-200 ease-in-out">
+                        <x-heroicon-o-shopping-bag class="w-5 me-1" /> Checkout
+                    </button>
+
                 </div>
             </div>
 
