@@ -34,10 +34,11 @@
 
         <div class="form bg-white w-full rounded-2xl py-5 px-10">
             {{-- Photo Profile --}}
-            <form action="{{ route('profile.update') }}" method="POST" class="">
+            <form action="{{ route('profile.update') }}" method="POST" class="personal-information"
+                enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                <div class="personal-information items-center flex flex-col w-full">
+                <div class=" items-center flex flex-col w-full">
                     {{-- personal information --}}
                     <div class="photo relative w-max">
                         <img src="{{ $dataUser->photo ?? 'https://ui-avatars.com/api/?length=1&background=random&color=fff&name=' . $dataUser->name }}"
@@ -57,32 +58,52 @@
                         <label for="name">Name</label>
                         <input type="text" class="form-control p-3 rounded bg-gray-100 border border-gray-300"
                             id="name" name="name" value="{{ $dataUser->name }}">
+                        @error('name')
+                            <p class="text-primary">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="mb-3 flex flex-col w-full">
                         <label for="email">Email</label>
                         <input type="text" class="form-control p-3 rounded bg-gray-100 border border-gray-300"
                             id="email" name="email" value="{{ $dataUser->email }}">
+                        @error('email')
+                            <p class="text-primary">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="mb-3 flex flex-col w-full">
                         <label for="phone">No. Handphone</label>
                         <input type="text" class="form-control p-3 rounded bg-gray-100 border border-gray-300"
                             id="phone" name="phone" value="{{ $dataUser->phone }}">
+                        @error('phone')
+                            <p class="text-primary">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    {{-- button update changes --}}
+                    @session('error')
+                        <p>{{ $value }}</p>
+                    @endsession
+                    <div class="button-update ms-auto">
+                        <button type="submit"
+                            class="me-0 p-3 bg-primary text-white rounded-lg hover:bg-primary/80 transition-all ease-in-out duration-200">Update
+                            Changes</button>
                     </div>
                 </div>
-
+            </form>
+            <form action="{{ route('profile.update') }}" method="POST" class="manage-address" hidden>
+                @csrf
+                @method('PUT')
                 {{-- manage address --}}
-                <div hidden class="manage-address items-center flex flex-col w-full">
+                <div class=" items-center flex flex-col w-full">
                     <p class="me-auto text-2xl font-semibold mb-3">Manage Address</p>
                     <div class="mb-3 flex flex-row gap-3 w-full">
                         <div class="form-group flex flex-col w-full">
                             <label for="latitude">Latitude</label>
-                            <input type="text"
-                                id="latitude"class="form-control p-3 rounded bg-gray-100 border border-gray-300"
-                                readonly>
+                            <input type="text" name="latitude" id="latitude" value="{{ $dataAddress->latitude }}"
+                                class="form-control p-3 rounded bg-gray-100 border border-gray-300" readonly>
                         </div>
                         <div class="form-group flex flex-col w-full">
                             <label for="longitude">Longitude</label>
-                            <input type="text" id="longitude"
+                            <input type="text" id="longitude" name="longitude" value="{{ $dataAddress->longitude }}"
                                 class="form-control p-3 rounded bg-gray-100 border border-gray-300" readonly>
                         </div>
                     </div>
@@ -90,29 +111,30 @@
                     <div class="mb-3 flex flex-row gap-3 w-full">
                         <div class="form-group flex flex-col w-full">
                             <label for="desa">Desa/Kelurahan</label>
-                            <input type="text" id="desa"
+                            <input type="text" id="desa" name="desa" value="{{ $dataAddress->desa }}"
                                 class="form-control p-3 rounded bg-gray-100 border border-gray-300" readonly>
                         </div>
 
                         <div class="form-group flex flex-col w-full">
                             <label for="kabupaten">Kabupaten/Kota</label>
-                            <input type="text" id="kabupaten"
+                            <input type="text" id="kabupaten" name="kabupaten" value="{{ $dataAddress->kabupaten }}"
                                 class="form-control p-3 rounded bg-gray-100 border border-gray-300" readonly>
                         </div>
                     </div>
 
                     <div class="mb-3 form-group flex flex-col w-full">
                         <label for="provinsi">Provinsi</label>
-                        <input type="text" id="provinsi"
+                        <input type="text" id="provinsi" name="provinsi" value="{{ $dataAddress->provinsi }}"
                             class="form-control p-3 rounded bg-gray-100 border border-gray-300" readonly>
                     </div>
 
                     <div class="mb-3 form-group flex flex-col w-full">
-                        <label for="alamat">Alamat Lengkap</label>
+                        <label for="full_address">Alamat Lengkap</label>
                         <div class="flex gap-1 ">
-                            <input type="text" id="alamat"
+                            <input type="text" id="full_address" name="full_address"
                                 class="form-control w-full p-3 rounded-l bg-gray-100 border border-gray-300"
-                                placeholder="Alamat lengkap akan terisi otomatis">
+                                placeholder="Alamat lengkap akan terisi otomatis"
+                                value="{{ $dataAddress->full_address }}">
                             <button type="button" id="btnLokasi" onclick="getAddress()"
                                 class="bg-primary text-white w-15 rounded-r hover:bg-primary/80 transition-all duration-200 ease-in-out">
                                 <x-heroicon-o-map-pin class="w-6 m-auto" />
@@ -123,15 +145,27 @@
 
                     <div class="mb-3 form-group info-box flex flex-col w-full">
                         <label for="jarak">Jarak dari MoodyCafe</label>
-                        <input type="text" id="jarak" readonly
-                            class="form-control p-3 rounded bg-gray-100 border border-gray-300">
+                        <input type="text" id="jarak" name="jarak" readonly
+                            class="form-control p-3 rounded bg-gray-100 border border-gray-300"
+                            value="{{ $dataAddress->jarak }}">
+                    </div>
+                    @session('error')
+                        <p>{{ $value }}</p>
+                    @endsession
+                    {{-- button update changes --}}
+                    <div class="button-update ms-auto">
+                        <button
+                            class="me-0 p-3 bg-primary text-white rounded-lg hover:bg-primary/80 transition-all ease-in-out duration-200">Update
+                            Changes</button>
                     </div>
                 </div>
-
-                {{-- <span class="loading" id="loadingText">Mengambil lokasi...</span> --}}
-
+            </form>
+            {{-- <span class="loading" id="loadingText">Mengambil lokasi...</span> --}}
+            <form action="{{ route('profile.update') }}" method="POST" class="password-manager" hidden>
+                @csrf
+                @method('PUT')
                 {{-- password manager --}}
-                <div hidden class="password-manager items-center flex flex-col w-full">
+                <div class=" items-center flex flex-col w-full">
                     <p class="me-auto text-2xl font-semibold mb-3">Change Password</p>
 
                     <div class="mb-3 form-group flex flex-col w-full">
@@ -149,16 +183,16 @@
                         <input type="password" id="confirm_password"
                             class="form-control p-3 rounded bg-gray-100 border border-gray-300" readonly>
                     </div>
+                    {{-- button update changes --}}
+                    <div class="button-update ms-auto">
+                        <button
+                            class="me-0 p-3 bg-primary text-white rounded-lg hover:bg-primary/80 transition-all ease-in-out duration-200">Update
+                            Changes</button>
+                    </div>
                 </div>
 
-                {{-- button update changes --}}
-                <div class="button-update ms-auto">
-                    <button
-                        class="me-0 p-3 bg-primary text-white rounded-lg hover:bg-primary/80 transition-all ease-in-out duration-200">Update
-                        Changes</button>
-                </div>
-            </form>
         </div>
+        </form>
     </section>
 </main>
 

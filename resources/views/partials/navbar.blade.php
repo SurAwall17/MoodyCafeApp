@@ -29,15 +29,15 @@
                 <li class="menu"><a href="/notification">Notifications</a></li>
                 <li class="menu"><a href="/about">About</a></li>
                 <li class="menu relative flex" onclick="handleDropdown()">
-                    <div class="icon-profile flex w-13" id="icon-profile">
+                    <div class="icon-profile flex" id="icon-profile">
                         <div class="image">
-                            <img class="rounded-full"
+                            <img class="rounded-full w-10"
                                 src="{{ auth()->user()->photo ?? 'https://ui-avatars.com/api/?length=1&background=random&color=fff&name=' . auth()->user()->name }}"
                                 alt="">
                         </div>
-                        <x-heroicon-o-chevron-down class="w-8 cursor-pointer" />
+                        <x-heroicon-o-chevron-down class="w-5 cursor-pointer" />
                     </div>
-                    <div class="hidden absolute right-0 mt-10 text-gray-600 shadow-2xl bg-white rounded-lg p-2 w-max max-w-100"
+                    <div class="hidden absolute right-0 mt-13 text-gray-600 shadow-2xl bg-white rounded-lg p-2 w-max max-w-100"
                         id="profile-dropdown">
 
                         <div class="flex items-center">

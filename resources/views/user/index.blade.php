@@ -15,7 +15,6 @@
                 </div>
 
                 <div class="w-55 md:w-full">
-
                     <p class="text-white text-[11px] md:text-[16px] lg:text-2xl mb-3 lg:mb-8 ms-5 md:ms-0">
                         Kadang yang kita butuh cuma jeda,
                         antara dingin yang menenangkan dan hangat yang menguatkan.
@@ -35,14 +34,10 @@
 
             </div>
 
-
-
-
-
         </div>
 
         <div data-aos="fade-left" data-aos-duration="500"
-            class="hidden md:block right-header md:w-1/2 object-cover justify-items-end p-5 md:pe-30 md:pt-20">
+            class="hidden md:block right-header object-cover justify-items-end p-5 md:pe-30 md:pt-20 lg:m-auto">
 
             <img src="{{ asset('images/hero-right.png') }}" class="w-full h-auto max-w-md" alt="">
         </div>

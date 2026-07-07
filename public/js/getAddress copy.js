@@ -20,8 +20,8 @@ function getAddress() {
         }
 
         // Tampilkan loading
+        // loadingText.style.display = "inline";
         btnLokasi.disabled = true;
-        btnLokasi.textContent = "Mengambil lokasi...";
 
         // Minta izin lokasi
         navigator.geolocation.getCurrentPosition(
@@ -38,12 +38,12 @@ function getAddress() {
                 const jarak = hitungJarak(lat, lng, TARGET_LAT, TARGET_LNG);
                 jarakInput.value = jarak;
 
-                // Panggil fungsi reverse geocoding
+                // Panggil fungsi reverse geocoding untuk dapatkan alamat
                 getAddressFromCoordinates(lat, lng);
 
                 // Sembunyikan loading
+                // loadingText.style.display = "none";
                 btnLokasi.disabled = false;
-                btnLokasi.textContent = "Ambil Lokasi Saya";
             },
             // Error callback
             function (error) {
@@ -63,8 +63,8 @@ function getAddress() {
                         pesanError = "Terjadi kesalahan saat mengambil lokasi.";
                 }
                 alert(pesanError);
+                // loadingText.style.display = "none";
                 btnLokasi.disabled = false;
-                btnLokasi.textContent = "Ambil Lokasi Saya";
             },
             // Options
             {
@@ -75,97 +75,27 @@ function getAddress() {
         );
     });
 
-    // Fungsi reverse geocoding menggunakan BigDataCloud
+    // Fungsi reverse geocoding menggunakan Nominatim (OpenStreetMap)
     function getAddressFromCoordinates(lat, lng) {
-        // URL API BigDataCloud (tanpa API key, gratis 60,000/bulan)
-        const url = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}&localityLanguage=id`;
-
-        fetch(url)
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then((data) => {
-                console.log("Data dari BigDataCloud:", data);
-
-                if (data && data.locality) {
-                    // BigDataCloud memberikan data dengan struktur berbeda
-
-                    // AMBIL DESA/KELURAHAN (locality)
-                    let desa =
-                        data.locality ||
-                        data.suburb ||
-                        data.cityDistrict ||
-                        "Tidak ditemukan";
-
-                    // Ambil kabupaten/kota (city)
-                    let kabupaten =
-                        data.city ||
-                        data.principalSubdivision ||
-                        "Tidak ditemukan";
-
-                    // Ambil provinsi (principalSubdivision)
-                    let provinsi =
-                        data.principalSubdivision ||
-                        data.countrySubdivision ||
-                        "Tidak ditemukan";
-
-                    // Ambil alamat lengkap
-                    let alamatLengkap =
-                        data.label ||
-                        `${data.locality || ""}, ${data.city || ""}, ${data.principalSubdivision || ""}`;
-
-                    // ISI INPUT
-                    desaInput.value = desa;
-                    kabupatenInput.value = kabupaten;
-                    provinsiInput.value = provinsi;
-                    alamatInput.value = alamatLengkap;
-
-                    console.log("Data lokasi berhasil diambil:", {
-                        desa,
-                        kabupaten,
-                        provinsi,
-                        alamatLengkap,
-                        countryCode: data.countryCode,
-                        countryName: data.countryName,
-                    });
-                } else {
-                    alert("Gagal mengambil data alamat. Data tidak lengkap.");
-                }
-            })
-            .catch((error) => {
-                console.error("Error:", error);
-                // Jika BigDataCloud gagal, coba fallback ke Nominatim
-                console.log("Mencoba fallback ke Nominatim...");
-                getAddressFromCoordinatesNominatim(lat, lng);
-            });
-    }
-
-    // Fungsi fallback ke Nominatim (jika BigDataCloud gagal)
-    function getAddressFromCoordinatesNominatim(lat, lng) {
+        // URL API Nominatim
         const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json&addressdetails=1&accept-language=id`;
 
-        // Tambahkan User-Agent yang valid
-        const headers = {
-            "User-Agent": "AplikasiGeocoding/1.0 (pengguna@email.com)",
-        };
-
-        fetch(url, { headers: headers })
+        fetch(url)
             .then((response) => response.json())
             .then((data) => {
                 if (data && data.address) {
                     const address = data.address;
 
+                    // AMBIL DESA/KELURAHAN
                     let desa =
-                        address.village ||
-                        address.neighbourhood ||
-                        address.suburb ||
-                        address.city_district ||
-                        address.town ||
+                        address.village || // Desa
+                        address.neighbourhood || // Lingkungan
+                        address.suburb || // Kelurahan
+                        address.city_district || // Kecamatan
+                        address.town || // Kota kecil
                         "Tidak ditemukan";
 
+                    // Ambil kabupaten/kota
                     let kabupaten =
                         address.city ||
                         address.town ||
@@ -173,20 +103,25 @@ function getAddress() {
                         address.state_district ||
                         "Tidak ditemukan";
 
+                    // Ambil provinsi
                     let provinsi =
                         address.state ||
                         address.province ||
                         address.region ||
                         "Tidak ditemukan";
 
+                    // Ambil alamat lengkap
                     let alamatLengkap = data.display_name || "";
 
+                    // ISI INPUT DESA
                     desaInput.value = desa;
+
+                    // Isi input lainnya
                     kabupatenInput.value = kabupaten;
                     provinsiInput.value = provinsi;
                     alamatInput.value = alamatLengkap;
 
-                    console.log("Data lokasi (fallback) berhasil diambil:", {
+                    console.log("Data lokasi berhasil diambil:", {
                         desa,
                         kabupaten,
                         provinsi,
@@ -197,17 +132,18 @@ function getAddress() {
                 }
             })
             .catch((error) => {
-                console.error("Error fallback:", error);
+                console.error("Error:", error);
                 alert(
-                    "Gagal mengambil data alamat. Periksa koneksi internet Anda dan coba lagi nanti.",
+                    "Gagal menghubungi server geocoding. Periksa koneksi internet Anda.",
                 );
             });
     }
 
-    // FUNGSI MENGHITUNG JARAK (Haversine Formula) - TIDAK BERUBAH
+    // FUNGSI MENGHITUNG JARAK (Haversine Formula)
     function hitungJarak(lat1, lon1, lat2, lon2) {
         const R = 6371; // Radius Bumi dalam kilometer
 
+        // Konversi derajat ke radian
         const dLat = ((lat2 - lat1) * Math.PI) / 180;
         const dLon = ((lon2 - lon1) * Math.PI) / 180;
 
@@ -220,16 +156,19 @@ function getAddress() {
 
         const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-        const jarakKm = R * c;
+        const jarakKm = R * c; // Jarak dalam kilometer
 
+        // Format hasil
         if (jarakKm < 1) {
+            // Jika kurang dari 1 km, tampilkan dalam meter
             const jarakMeter = Math.round(jarakKm * 1000);
             return `${jarakMeter} meter`;
         } else if (jarakKm < 10) {
+            // Jika kurang dari 10 km, tampilkan 1 desimal
             return `${jarakKm.toFixed(1)} km`;
         } else {
+            // Jika lebih dari 10 km, tampilkan tanpa desimal
             return `${Math.round(jarakKm)} km`;
         }
     }
 }
-

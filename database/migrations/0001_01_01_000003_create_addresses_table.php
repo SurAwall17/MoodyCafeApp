@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->string('latitude');
-            $table->string('longtitude');
+            $table->string('longitude');
             $table->string('desa');
-            $table->string('kecamatan');
+            $table->string('kabupaten');
             $table->string('provinsi');
             $table->text('full_address');
             $table->string('jarak');
